@@ -35,11 +35,15 @@ namespace WebApi2.Controllers
             }
             catch (ArgumentException ex) // Validaciones del caso de uso
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
-            catch (Exception ex) // Otros errores
+            catch (InvalidOperationException ex) // Errores de lógica del negocio
             {
-                return StatusCode(500, $"Error interno: {ex.Message}");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex) // Otros errores inesperados
+            {
+                return StatusCode(500, new { message = "Error interno del servidor", detalle = ex.Message });
             }
 
         }
@@ -57,11 +61,15 @@ namespace WebApi2.Controllers
             }
             catch (ArgumentException ex) // Validaciones del caso de uso
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
-            catch (Exception ex) // Otros errores
+            catch (InvalidOperationException ex) // Errores de lógica del negocio
             {
-                return StatusCode(500, $"Error interno: {ex.Message}");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex) // Otros errores inesperados
+            {
+                return StatusCode(500, new { message = "Error interno del servidor", detalle = ex.Message });
             }
 
         }
@@ -84,13 +92,17 @@ namespace WebApi2.Controllers
 
                 return Ok(new { id = usuario.Id, usuario, token, role = usuario.Rol });
             }
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
-            catch (Exception ex) 
+            catch (InvalidOperationException ex)
             {
-                return StatusCode(500, $"Error interno: {ex.Message}");
+                return Unauthorized(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error interno del servidor", detalle = ex.Message });
             }
         }
 

@@ -88,7 +88,7 @@ namespace ProyectoIntegrador.WebApiVersion3.Controllers
             }
             catch (ArgumentException ex) // Parámetros inválidos
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
             catch (KeyNotFoundException ex) // Pedido no encontrado
             {
@@ -100,7 +100,7 @@ namespace ProyectoIntegrador.WebApiVersion3.Controllers
             }
             catch (Exception ex) // Error interno
             {
-                return StatusCode(500, $"Error interno: {ex.Message}");
+                return StatusCode(500, new { message = "Error interno del servidor", detalle = ex.Message });
             }
         }
 

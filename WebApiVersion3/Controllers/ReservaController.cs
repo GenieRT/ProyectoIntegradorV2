@@ -28,9 +28,6 @@ namespace ProyectoIntegrador.WebApi2.Controllers
 
         //Registro de Reserva
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Authorize(Roles = "Cliente")]
         public IActionResult Post([FromBody]ReservaDTO reserva)
         {
@@ -38,9 +35,21 @@ namespace ProyectoIntegrador.WebApi2.Controllers
             {
                 ReservaDTO reservaDTO = _registrarReserva.Ejecutar(reserva);
                 return Created("api/v1/Reserva", reservaDTO);
-            }catch (Exception ex)
+            }
+            catch (ArgumentNullException ex)
             {
-                return BadRequest(ex.Message);
+                // Capturar excepciones para argumentos nulos
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Capturar excepciones de operación inválida
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Capturar cualquier otra excepción como error genérico
+                return StatusCode(500, new { message = "Error interno del servidor", detalle = ex.Message });
             }
         }
 

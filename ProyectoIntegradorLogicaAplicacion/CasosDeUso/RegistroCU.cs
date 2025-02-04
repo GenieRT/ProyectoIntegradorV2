@@ -60,7 +60,7 @@ namespace ProyectoIntegradorLogicaAplicacion.CasosDeUso
             var usuario = repoUsuarios.FindByEmail(email);
             if (usuario == null)
             {
-                throw new Exception("Usuario no encontrado.");
+                throw new InvalidOperationException("Usuario no encontrado.");
             }
 
             // Validar la nueva contraseña
@@ -103,13 +103,13 @@ namespace ProyectoIntegradorLogicaAplicacion.CasosDeUso
             var usuario = repoUsuarios.FindByEmail(email);
             if (usuario == null)
             {
-                throw new Exception("Usuario no encontrado.");
+                throw new InvalidOperationException("Usuario no encontrado.");
             }
 
             //validar el token
             if (usuario.ConfirmationToken != token)
             {
-                throw new Exception("Token inválido o expirado.");
+                throw new InvalidOperationException("Token inválido o expirado.");
             }
 
             //confirmar el cambio de contraseña

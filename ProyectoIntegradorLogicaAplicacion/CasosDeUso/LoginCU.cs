@@ -31,13 +31,13 @@ namespace ProyectoIntegradorLogicaAplicacion.CasosDeUso
             var usuario = repoUsuarios.FindByEmail(email);
             if (usuario == null)
             {
-                throw new Exception("El email no está registrado.");
+                throw new InvalidOperationException("El email y/o la contraseña son incorrectos. Inténtalo de nuevo");
             }
 
             string claveEncriptada = Usuario.ComputeSha256Hash(pass);
             if (usuario.EncriptedPassword != claveEncriptada)
             {
-                throw new Exception("Contraseña incorrecta.");
+                throw new InvalidOperationException("El email y/o la contraseña son incorrectos. Inténtalo de nuevo");
             }
 
             return new UsuarioDTO(usuario);

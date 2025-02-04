@@ -22,17 +22,21 @@ namespace ProyectoIntegradorLogicaAplicacion.CasosDeUso
         {
             try
             {
-                // Llama al método del repositorio para obtener los pedidos pendientes
-                return repoPedidos.ListarPedidosPendientes();
+                var pedidosPendientes = repoPedidos.ListarPedidosPendientes();
+
+                if (!pedidosPendientes.Any())
+                {
+                    throw new ArgumentException("No hay pedidos pendientes para aprobar.");
+                }
+
+                return pedidosPendientes;
             }
             catch (ArgumentException ex)
             {
-                // Lanza una excepción controlada en caso de argumentos inválidos
                 throw new ArgumentException("Ocurrió un error al listar los pedidos pendientes: " + ex.Message);
             }
             catch (Exception ex)
             {
-                // Lanza una excepción general para cualquier otro error
                 throw new Exception("Error inesperado al listar los pedidos pendientes: " + ex.Message);
             }
         }

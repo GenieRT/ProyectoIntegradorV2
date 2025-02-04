@@ -19,7 +19,6 @@ namespace ProyectoIntegradorLogicaAplicacion.DTOs.Mapper
         }
 
 
-
         public static LineaReservaDTO ToDto(LineaReserva linea)
         {
             return new LineaReservaDTO()
@@ -40,19 +39,6 @@ namespace ProyectoIntegradorLogicaAplicacion.DTOs.Mapper
                 aux.Add(lineaDto);
             }
             return aux;
-        }
-
-        public static ProductoDemandaDTO MapToProductoDemandaDTO(IEnumerable<LineaReserva> lineasReserva, Producto producto)
-        {
-            var toneladasReservadas = lineasReserva.Sum(lr => lr.CantidadReservada);
-            return new ProductoDemandaDTO
-            {
-                ProductoId = producto.Id,
-                ProductoNombre = producto.Descripcion,
-                ToneladasReservadas = toneladasReservadas,
-                StockDisponible = producto.StockDisponible,
-                AlertaProduccion = toneladasReservadas > producto.StockDisponible
-            };
         }
 
         public static IEnumerable<ProductoDemandaDTO> MapToProductoDemandaDTOList(IEnumerable<LineaReserva> lineasReserva, IEnumerable<Producto> productos)

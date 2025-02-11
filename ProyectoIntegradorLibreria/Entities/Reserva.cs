@@ -33,9 +33,9 @@ namespace ProyectoIntegradorLibreria.Entities
 
         private void ValidarReserva()
         {
-            if (Fecha < DateTime.Now.AddDays(7))
+            if (Fecha <= DateTime.Now.AddDays(3))
             {
-                throw new InvalidOperationException("La fecha de la reserva debe ser al menos una semana después del día actual.");
+                throw new InvalidOperationException("La fecha de la reserva debe ser al menos tres días después del día actual.");
             }
 
             if (string.IsNullOrWhiteSpace(Camion))

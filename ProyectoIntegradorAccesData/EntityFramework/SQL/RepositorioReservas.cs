@@ -162,8 +162,8 @@ namespace ProyectoIntegradorAccesData.EntityFramework.SQL
         public IEnumerable<LineaReserva> GetReservasProximaSemana()
         {
             // Calcular el rango de fechas para la próxima semana
-            var fechaInicio = DateTime.Now.Date.AddDays(7 - (int)DateTime.Now.DayOfWeek); 
-            var fechaFin = fechaInicio.AddDays(7); // Domingo siguiente
+            var fechaInicio = DateTime.Now.Date.AddDays((DateTime.Now.DayOfWeek == DayOfWeek.Sunday) ? 1 : (8 - (int)DateTime.Now.DayOfWeek));
+            var fechaFin = fechaInicio.AddDays(7); // Fin del próximo domingo
 
             var reservas = _context.Reservas
                 .Include(r => r.LineasReservas) 

@@ -36,7 +36,7 @@ namespace ProyectoIntegradorLibreria.Entities
 
         public bool EstaCompletamenteReservado()
         {
-            return Productos.All(lp => GetCantidadReservada(lp.ProductoId) == lp.Cantidad);
+            return Productos.All(lp => lp.CantidadRestante == 0);
         }
 
         public void SetCantidadRestante(int idProducto, int cant)

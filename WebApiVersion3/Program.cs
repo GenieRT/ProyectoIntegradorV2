@@ -203,7 +203,6 @@ namespace WebApiVersion3
             services.AddScoped<ILogin, LoginCU>();
             services.AddScoped<IObtenerPedidoPorId, ObtenerPedidoPorIdCU>();
             services.AddScoped<IObtenerProductoPorId, ObtenerProductoPorIdCU>();
-            services.AddScoped<IListarReservas, ListarReservasCU>();
             services.AddScoped<IObtenerReservasProximaSemana, ObtenerReservasSemanaProximaCU>();
             services.AddScoped<IRegistrarTurnoCarga, RegistraTurnoCargaCU>();
             services.AddScoped<IListarClientes, ListarClientesCU>();

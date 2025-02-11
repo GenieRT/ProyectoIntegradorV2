@@ -31,6 +31,10 @@ namespace ProyectoIntegradorAccesData.EntityFramework.SQL
                 {
                     throw new Exception("Usuario no encontrado");
                 }
+                if(GetClienteById(pedido.ClienteId).Rol != "Cliente")
+                {
+                    throw new Exception("Solo los clientes pueden hacer pedidos");
+                }
                 foreach(LineaPedido ln in pedido.Productos)
                 {
                     if(GetProductoById(ln.ProductoId) == null || GetPresentacionById(ln.PresentacionId) == null){

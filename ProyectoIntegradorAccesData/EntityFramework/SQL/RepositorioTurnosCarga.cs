@@ -48,6 +48,7 @@ namespace ProyectoIntegradorAccesData.EntityFramework.SQL
             _context.SaveChanges();
         }
 
+
         public TurnoCarga ObtenerTurnoPorFecha(DateTime fecha)
         {
             return _context.TurnosCargas
